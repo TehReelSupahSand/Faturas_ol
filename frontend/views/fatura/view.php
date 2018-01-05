@@ -11,9 +11,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Faturas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $linhaFatura = frontend\models\LinhaFatura::find()
-    ->where(['=', 'id_fatura', 2])
-    ->all();
+    ->where(['id_fatura' => $model->id]);
 
+    $linhaFatura = Yii::$app->getDb()->createCommand("SELECT * FROM linha_fatura WHERE id_fatura = $model->id");
+    $result = $linhaFatura->queryAll();
 ?>
 
 <div class="fatura-view">
@@ -21,11 +22,10 @@ $linhaFatura = frontend\models\LinhaFatura::find()
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Alterar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Tem a certeza q pretende eliminar esta fatura?',
+                'confirm' => 'Tem a certeza que pretende eliminar esta fatura?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -41,13 +41,14 @@ $linhaFatura = frontend\models\LinhaFatura::find()
         ],
     ]) ?>
 
-    <?php //return $linhaFatura; ?>
+    <?php $linhaFatura->queryAll() ?>
 
     <?= DetailView::widget([
-        'model' => $linhaFatura,
+        'model' => $result,
         'attributes' => [
-            'valor_unitario',
             'nome_produto',
+            'valor_unitario',
+            //'quantidade',
             'valor_total',
         ],
     ]) ?>
