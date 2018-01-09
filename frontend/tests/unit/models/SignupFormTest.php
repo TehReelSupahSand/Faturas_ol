@@ -25,35 +25,55 @@ class SignupFormTest extends \Codeception\Test\Unit
     public function testCorrectSignup()
     {
         $model = new SignupForm([
-            'username' => 'some_username',
-            'email' => 'some_email@example.com',
-            'password' => 'some_password',
+            'username' => 'testes_unitarios',
+            'email' => '123456@testeunitario.com',
+            'password' => '123456',
+            'confirmar_password' => '123456',
+            'nome' => 'Sou um teste unitario',
+            'nif' => '124578639',
+
+
         ]);
 
         $user = $model->signup();
 
-        expect($user)->isInstanceOf('common\models\User');
+        expect($user)->isInstanceOf('frontend\models\Cliente');
 
-        expect($user->username)->equals('some_username');
-        expect($user->email)->equals('some_email@example.com');
-        expect($user->validatePassword('some_password'))->true();
+        expect($user->username)->equals('testes_unitarios');
+        expect($user->email)->equals('123456@testeunitario.com');
+        expect($user->validatePassword('123456'))->true();
     }
 
     public function testNotCorrectSignup()
     {
         $model = new SignupForm([
-            'username' => 'troy.becker',
-            'email' => 'nicolas.dianna@hotmail.com',
-            'password' => 'some_password',
+            'username' => 'teste2',
+            'email' => '123456@mail.com',
+            'password' => '1236',
+            'confirmar_password' => '1236',
+            'nome' => 'Sou um teste',
+            'nif' => '12457863',
+
+
         ]);
 
         expect_not($model->signup());
         expect_that($model->getErrors('username'));
         expect_that($model->getErrors('email'));
+        expect_that($model->getErrors('password'));
+        expect_that($model->getErrors('confirmar_password'));
 
         expect($model->getFirstError('username'))
-            ->equals('This username has already been taken.');
+            ->equals('Este Username já está em utilização');
         expect($model->getFirstError('email'))
-            ->equals('This email address has already been taken.');
+            ->equals('Este E-mail já foi utilizado');
+        expect($model->getFirstError('password'))
+        ->equals('Password should contain at least 6 characters.');
+        expect($model->getFirstError('confirmar_password'))
+            ->equals('Password Repeat should contain at least 6 characters.');
+        /*expect($model->getFirstError('confirmar_password'))
+        ->equals('Password inserida diferente');*/
+        expect($model->getFirstError('nif'))
+        ->equals('Nif should contain at least 9 characters.');
     }
 }

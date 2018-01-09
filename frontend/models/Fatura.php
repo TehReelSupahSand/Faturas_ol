@@ -76,4 +76,5 @@ class Fatura extends \yii\db\ActiveRecord
     {
         return $this->hasMany(LinhaFatura::className(), ['id_fatura' => 'id']);
     }
+
 }
