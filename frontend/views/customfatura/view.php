@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Customfatura */
 
-$this->title = $model->id;
+$this->title = "Fatura Customizada | ".$model->numero;
 $this->params['breadcrumbs'][] = ['label' => 'Customfaturas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -25,7 +25,10 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
+    <?=
+
+
+    DetailView::widget([
         'model' => $model,
         'attributes' => [
             //'id',

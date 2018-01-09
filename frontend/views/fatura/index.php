@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="fatura-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title." | ".Yii::$app->user->identity->nome) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <br>

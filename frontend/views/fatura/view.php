@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Fatura */
 
-$this->title = $model->id;
+$this->title = "Fatura | ".$model->numero;
 $this->params['breadcrumbs'][] = ['label' => 'Faturas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -19,7 +19,7 @@ $linhaFatura = frontend\models\LinhaFatura::find()
 
 <div class="fatura-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode('Fatura: '.$model->numero) ?></h1>
 
     <p>
         <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
