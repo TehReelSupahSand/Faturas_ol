@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'data',
             //'imagem_path',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn','template'=>'{view} {delete}'],
         ],
     ]); ?>
     <br>
