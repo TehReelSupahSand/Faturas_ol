@@ -1,5 +1,6 @@
 <?php
 
+use yii\data\SqlDataProvider;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -9,6 +10,13 @@ use yii\widgets\DetailView;
 $this->title = "Fatura Customizada | ".$model->numero;
 $this->params['breadcrumbs'][] = ['label' => 'Customfaturas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$query = \frontend\models\LinhaFatura::find()->where(['id_fatura'=>$model->id]);
+$rows = $query->createCommand()->queryAll();
+
+$sql = "SELECT * FROM `linha_fatura` WHERE `id_fatura` IS LIKE ".$model->id;
+
+
 ?>
 <div class="customfatura-view">
 
@@ -26,8 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?=
-
-
     DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -39,5 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'morada_empresa',
         ],
     ]) ?>
+
+
 
 </div>
