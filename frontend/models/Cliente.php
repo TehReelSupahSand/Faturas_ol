@@ -19,6 +19,7 @@ use yii\web\IdentityInterface;
  * @property integer $telemovel
  * @property integer $nif
  * @property string $password write-only password
+ * @property string $new_password
  *
  * @property CustomFaturaCliente[] $customFaturaClientes
  * @property FaturaCliente[] $faturaClientes
@@ -178,10 +179,10 @@ class Cliente extends ActiveRecord implements IdentityInterface
 
 
     public function updatePassword($new_password) {
-        if ($new_password=''){
-            return $this->password_hash;
+        if ($this->new_password==""){
+            return false;
         }
-        else {
+        else if ($this->new_password!=''){
             $this->password_hash = Yii::$app->security->generatePasswordHash($new_password);
         }
     }

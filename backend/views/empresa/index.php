@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="empresa-index">
 
-    <?php if (Yii::$app->user->identity->username != 'admin'){
+    <?php if (Yii::$app->user->identity->auth_key != 'QHqZWOkZcoDRzhESnShjdwQOsnifw_H1'){
         echo "Sem autorização para aceder backend $this->title";
     }
     else{?>
