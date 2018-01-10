@@ -12,6 +12,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cliente-index">
 
+    <?php if (Yii::$app->user->identity->username != 'admin'){
+        echo "Sem autorização para aceder backend $this->title";
+    }
+    else{?>
+
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -36,4 +41,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+
+    <?php } ?>
 </div>
