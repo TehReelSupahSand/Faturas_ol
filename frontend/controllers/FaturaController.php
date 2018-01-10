@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\models\FaturaCliente;
 use Yii;
 use frontend\models\Fatura;
 use frontend\models\FaturaSearch;
@@ -120,5 +121,16 @@ class FaturaController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionFindInTable()
+    {
+        $value = Yii::$app->user->id;
+        $fatura = FaturaCliente::findAll(''.$value);
+        //$exist = FaturaCliente::find()->where([ 'numero_cartao_cliente' => $value])->exists();
+        /*return array(
+            'condition'=>'user_id='.Yii::$app->user->id,
+        );*/
+        //return $exist;
     }
 }
