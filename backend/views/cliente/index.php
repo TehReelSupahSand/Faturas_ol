@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'nif',
             // 'auth_key',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn','template'=>'{view}'],
         ],
     ]); ?>
 

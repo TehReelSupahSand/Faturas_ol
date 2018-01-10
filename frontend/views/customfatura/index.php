@@ -16,12 +16,12 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?php //echo $this->render('_search', ['model' => $searchModel]); ?>
 
 	<p>
-		<?= Html::a('Create Customfatura', ['create'], ['class' => 'btn btn-success']) ?>
+		<?= Html::a('Criar Fatura Customizada', ['create'], ['class' => 'btn btn-success']) ?>
 	</p>
 	<?= GridView::widget([
 	        'summary' => '',
 		'dataProvider' => $dataProvider,
-		//'filterModel' => $searchModel,
+		'filterModel' => $searchModel,
 		'columns' => [
 			//['class' => 'yii\grid\SerialColumn'],
 
