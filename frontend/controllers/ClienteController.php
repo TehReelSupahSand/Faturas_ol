@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use Codeception\Module\Cli;
 use Yii;
 use frontend\models\Cliente;
 use frontend\models\ClienteSearch;
@@ -83,6 +84,7 @@ class ClienteController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
         $model->updatePassword('new_password');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

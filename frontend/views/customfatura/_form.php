@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'numero')->textInput() ?>
 
-    <?= $form->field($model, 'data')->textInput() ?>
+    <?= $form->field($model, 'data')->textInput(['placeholder'=>'AA/MM/DD']) ?>
 
     <?= $form->field($model, 'nif_empresa')->textInput() ?>
 
