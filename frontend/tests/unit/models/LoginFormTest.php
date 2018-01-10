@@ -47,12 +47,12 @@ class LoginFormTest extends \Codeception\Test\Unit
     public function testLoginWrongPassword()
     {
         $model = new LoginForm([
-            'username' => 'Nao_existo',
+            'username' => 'soutester',
             'password' => 'Errado',
         ]);
 
         expect('login error', $model->login())->false();
-        expect('utilizador ou password incorretos ', $model->errors)->hasKey('password');
+        expect('password incorreto', $model->errors)->hasKey('password');
         expect('user deve ser guest', Yii::$app->user->isGuest)->true();
     }
 
