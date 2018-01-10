@@ -17,11 +17,14 @@ class SignupCest
     public function signupWithEmptyFields(FunctionalTester $I)
     {
         $I->see('Signup', 'h1');
-        $I->see('Please fill out the following fields to signup:');
+        $I->see('Preencha os campos seguintes para efetuar o registo:');
         $I->submitForm($this->formId, []);
-        $I->seeValidationError('Username cannot be blank.');
-        $I->seeValidationError('Email cannot be blank.');
-        $I->seeValidationError('Password cannot be blank.');
+        $I->seeValidationError('Insira o seu Nome');
+        $I->seeValidationError('Username obrigatório');
+        $I->seeValidationError('Password obrigatória');
+        $I->seeValidationError('Por favor introduza novamente a Password');
+        $I->seeValidationError('NIF obrigatório');
+        $I->seeValidationError('E-mail obrigatório');
 
     }
 
@@ -29,29 +32,40 @@ class SignupCest
     {
         $I->submitForm(
             $this->formId, [
-            'SignupForm[username]'  => 'tester',
+            'SignupForm[username]'  => 'teste_funcional',
             'SignupForm[email]'     => 'ttttt',
-            'SignupForm[password]'  => 'tester_password',
+            'SignupForm[nome]'  => 'teste_funcional',
+            'SignupForm[password]'  => 'teste_funcional_password',
+            'SignupForm[password_repeat]'  => 'teste_funcional_password',
+            'SignupForm[nif]'  => '123456789',
         ]
         );
-        $I->dontSee('Username cannot be blank.', '.help-block');
-        $I->dontSee('Password cannot be blank.', '.help-block');
+        $I->dontSee('Insira o seu Nome', '.help-block');
+        $I->dontSee('Username obrigatório', '.help-block');
+        $I->dontSee('Password obrigatória', '.help-block');
+        $I->dontSee('Por favor introduza novamente a Password', '.help-block');
+        $I->dontSee('NIF obrigatório', '.help-block');
+        $I->dontSee('E-mail obrigatório', '.help-block');
         $I->see('Email is not a valid email address.', '.help-block');
     }
 
     public function signupSuccessfully(FunctionalTester $I)
     {
-        $I->submitForm($this->formId, [
-            'SignupForm[username]' => 'tester',
-            'SignupForm[email]' => 'tester.email@example.com',
-            'SignupForm[password]' => 'tester_password',
-        ]);
+        $I->submitForm(
+            $this->formId, [
+                'SignupForm[username]'  => 'teste_funcional',
+                'SignupForm[email]'     => 'ttttt@tttt.tt',
+                'SignupForm[nome]'  => 'teste_funcional',
+                'SignupForm[password]'  => 'teste_funcional_password',
+                'SignupForm[password_repeat]'  => 'teste_funcional_password',
+                'SignupForm[nif]'  => '123456789',
+            ]
+        );
 
         $I->seeRecord('common\models\User', [
-            'username' => 'tester',
-            'email' => 'tester.email@example.com',
+            'username' => 'teste_funcional',
         ]);
 
-        $I->see('Logout (tester)', 'form button[type=submit]');
+        $I->see('Logout (teste_funcional)', 'form button[type=submit]');
     }
 }
