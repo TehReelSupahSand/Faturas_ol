@@ -10,11 +10,12 @@ $this->title = "Fatura | ".$model->numero;
 $this->params['breadcrumbs'][] = ['label' => 'Faturas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-$linhaFatura = frontend\models\LinhaFatura::find()
-    ->where(['id_fatura' => $model->id]);
+$rows = (new \yii\db\Query())
+    ->from('linha_fatura')
+    ->where(['id_fatura' => $model->id])
+    //->limit(10)
+    ->all();
 
-    $linhaFatura = Yii::$app->getDb()->createCommand("SELECT * FROM linha_fatura WHERE id_fatura = $model->id");
-    $result = $linhaFatura->queryAll();
 ?>
 
 <div class="fatura-view">
@@ -41,16 +42,13 @@ $linhaFatura = frontend\models\LinhaFatura::find()
         ],
     ]) ?>
 
-    <?php $linhaFatura->queryAll() ?>
+    <h4>Linhas da fatura</h4>
 
-    <?= DetailView::widget([
-        'model' => $result,
-        'attributes' => [
-            'nome_produto',
-            'valor_unitario',
-            //'quantidade',
-            'valor_total',
-        ],
-    ]) ?>
+    <?php
+    echo 'Valor unitario|€  |  Nome do Produto  |  Descricao  |  Valor Total';
+    echo "</br>";
+    foreach ($rows as $row){
+        echo $row['valor_unitario'].'€ ---   '.$row['nome_produto'].'---    '.$row['descricao'].'  ---  '.$row['valor_total'] ."€</br>";
+    } ?>
 
 </div>

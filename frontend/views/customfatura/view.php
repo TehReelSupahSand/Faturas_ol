@@ -11,10 +11,11 @@ $this->title = "Fatura Customizada | ".$model->numero;
 $this->params['breadcrumbs'][] = ['label' => 'Customfaturas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-$query = \frontend\models\LinhaFatura::find()->where(['id_fatura'=>$model->id]);
-$rows = $query->createCommand()->queryAll();
-
-$sql = "SELECT * FROM `linha_fatura` WHERE `id_fatura` IS LIKE ".$model->id;
+$rows = (new \yii\db\Query())
+    ->from('linha_fatura')
+    ->where(['id_custom_fatura' => $model->id])
+    //->limit(10)
+    ->all();
 
 
 ?>
@@ -46,6 +47,11 @@ $sql = "SELECT * FROM `linha_fatura` WHERE `id_fatura` IS LIKE ".$model->id;
         ],
     ]) ?>
 
-
-
+    <h4>Linhas da fatura</h4>
+    <?php
+    echo 'Valor unitario|€  |  Nome do Produto  |  Descricao  |  Valor Total';
+    echo "</br>";
+    foreach ($rows as $row){
+        echo $row['valor_unitario'].'€ ---   '.$row['nome_produto'].'---    '.$row['descricao'].'  ---  '.$row['valor_total'] ."€</br>";
+    } ?>
 </div>
