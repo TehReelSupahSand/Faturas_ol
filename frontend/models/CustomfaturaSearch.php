@@ -41,7 +41,7 @@ class CustomfaturaSearch extends Customfatura
      */
     public function search($params)
     {
-        $query = Customfatura::find();
+        $query = Customfatura::find()->join('INNER JOIN','custom_fatura_cliente','custom_fatura_cliente.id_custom_faturas = customfatura.id')->where(['custom_fatura_cliente.numero_cartao_cliente'=> Yii::$app->user->identity->numero_cartao]);;
 
         // add conditions that should always apply here
 

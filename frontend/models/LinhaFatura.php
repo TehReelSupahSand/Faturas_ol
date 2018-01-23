@@ -34,8 +34,9 @@ class LinhaFatura extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['valor_unitario', 'nome_produto', 'descricao', 'valor_total'], 'required'],
+            [['valor_unitario', 'quantidade', 'nome_produto', 'descricao'], 'required'],
             [['valor_unitario', 'valor_total'], 'number'],
+            [['quantidade'], 'integer', 'max'=> 1000],
             [['id_fatura', 'id_custom_fatura'], 'integer'],
             [['nome_produto', 'descricao'], 'string', 'max' => 100],
             [['id_fatura'], 'exist', 'skipOnError' => true, 'targetClass' => Fatura::className(), 'targetAttribute' => ['id_fatura' => 'id']],
@@ -52,6 +53,7 @@ class LinhaFatura extends \yii\db\ActiveRecord
             'id' => 'ID',
             'valor_unitario' => 'Valor Unitario',
             'nome_produto' => 'Nome Produto',
+            'quantidade' => 'Quantidade',
             'descricao' => 'Descricao',
             'id_fatura' => 'Id Fatura',
             'id_custom_fatura' => 'Id Custom Fatura',

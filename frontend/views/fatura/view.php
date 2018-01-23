@@ -45,10 +45,10 @@ $rows = (new \yii\db\Query())
     <h4>Linhas da fatura</h4>
 
     <?php
-    echo 'Valor unitario|€  |  Nome do Produto  |  Descricao  |  Valor Total';
+    echo 'Valor unitario|€  |   Quantidade  |  Nome do Produto  |  Descricao  |  Valor Total';
     echo "</br>";
     foreach ($rows as $row){
-        echo $row['valor_unitario'].'€ ---   '.$row['nome_produto'].'---    '.$row['descricao'].'  ---  '.$row['valor_total'] ."€</br>";
+        echo $row['valor_unitario'].'€ ---   '.$row['quantidade'].' --- '.$row['nome_produto'].'---    '.$row['descricao'].'  ---  '.$row['valor_total'] ."€</br>";
     } ?>
 
 </div>

@@ -14,8 +14,11 @@ $this->params['breadcrumbs'][] = $this->title;
 $rows = (new \yii\db\Query())
     ->from('linha_fatura')
     ->where(['id_custom_fatura' => $model->id])
-    //->limit(10)
     ->all();
+
+$delCustom_cliente = \frontend\models\CustomFaturaCliente::find($model->id);
+$delLinha = \frontend\models\LinhaFatura::find($model->id);
+$delFatura = $model::find($model->id);
 
 
 ?>
@@ -49,9 +52,9 @@ $rows = (new \yii\db\Query())
 
     <h4>Linhas da fatura</h4>
     <?php
-    echo 'Valor unitario|€  |  Nome do Produto  |  Descricao  |  Valor Total';
+    echo 'Valor unitario|€  |   Quantidade  |  Nome do Produto  |  Descricao  |  Valor Total';
     echo "</br>";
     foreach ($rows as $row){
-        echo $row['valor_unitario'].'€ ---   '.$row['nome_produto'].'---    '.$row['descricao'].'  ---  '.$row['valor_total'] ."€</br>";
+        echo $row['valor_unitario'].'€ ---   '.$row['quantidade'].' --- '.$row['nome_produto'].'---    '.$row['descricao'].'  ---  '.$row['valor_total'] ."€</br>";
     } ?>
 </div>

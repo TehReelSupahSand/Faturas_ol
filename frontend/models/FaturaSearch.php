@@ -18,7 +18,7 @@ class FaturaSearch extends Fatura
     public function rules()
     {
         return [
-            [['id', 'numero'], 'integer'],
+            [['id', 'numero','favorito'], 'integer'],
             [['data', 'imagem_path'], 'safe'],
         ];
     }
@@ -41,7 +41,7 @@ class FaturaSearch extends Fatura
      */
     public function search($params)
     {
-        $query = Fatura::find();
+        $query = Fatura::find()->join('INNER JOIN','fatura_cliente','fatura_cliente.id_fatura = fatura.id')->where(['fatura_cliente.numero_cartao_cliente'=> Yii::$app->user->identity->numero_cartao]);
 
         // add conditions that should always apply here
 
@@ -62,6 +62,7 @@ class FaturaSearch extends Fatura
             'id' => $this->id,
             'numero' => $this->numero,
             'data' => $this->data,
+            'favorito' => $this->favorito,
         ]);
 
         $query->andFilterWhere(['like', 'imagem_path', $this->imagem_path]);

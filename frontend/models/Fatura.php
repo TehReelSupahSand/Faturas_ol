@@ -11,6 +11,7 @@ use Yii;
  * @property integer $numero
  * @property string $data
  * @property string $imagem_path
+ * @property integer $favorito
  *
  * @property FaturaCliente[] $faturaClientes
  * @property FaturaEmpresa[] $faturaEmpresas
@@ -37,6 +38,7 @@ class Fatura extends \yii\db\ActiveRecord
             [['data'], 'safe',],
             [['data'], 'required',],
             [['imagem_path'], 'string', 'max' => 1024],
+            [['favorito'], 'integer', 'max' => 1],
         ];
     }
 
@@ -50,6 +52,7 @@ class Fatura extends \yii\db\ActiveRecord
             'numero' => 'Numero',
             'data' => 'Data',
             'imagem_path' => 'Imagem Path',
+            'favorito' => 'Favorito',
         ];
     }
 
