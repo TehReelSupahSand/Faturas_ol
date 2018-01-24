@@ -16,9 +16,6 @@ $rows = (new \yii\db\Query())
     ->where(['id_custom_fatura' => $model->id])
     ->all();
 
-$delCustom_cliente = \frontend\models\CustomFaturaCliente::find($model->id);
-$delLinha = \frontend\models\LinhaFatura::find($model->id);
-$delFatura = $model::find($model->id);
 
 
 ?>

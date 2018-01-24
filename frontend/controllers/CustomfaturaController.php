@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\models\CustomFaturaCliente;
 use Yii;
 use frontend\models\Customfatura;
 use frontend\models\CustomfaturaSearch;
@@ -66,6 +67,13 @@ class CustomfaturaController extends Controller
         $model = new Customfatura();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $faturaCliete = new CustomFaturaCliente();
+
+            $faturaCliete->id_custom_faturas=$model->id;
+            $faturaCliete->numero_cartao_cliente=Yii::$app->user->identity->numero_cartao;
+
+            $faturaCliete->save();
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -80,6 +88,7 @@ class CustomfaturaController extends Controller
      * @param integer $id
      * @return mixed
      */
+
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -101,6 +110,21 @@ class CustomfaturaController extends Controller
      */
     public function actionDelete($id)
     {
+        $delCustom_cliente = \frontend\models\CustomfaturaCliente::findAll(['id_custom_faturas'=>$id]);
+        $delLinha = \frontend\models\LinhaFatura::findAll(['id_custom_fatura'=>$id]);
+
+
+        foreach ($delCustom_cliente as $del){
+            $del->delete();
+        }
+
+
+        //funciona
+        foreach ($delLinha as $del){
+            $del->delete();
+        }
+
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

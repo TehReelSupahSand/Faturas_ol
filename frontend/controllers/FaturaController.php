@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use frontend\models\FaturaCliente;
+use frontend\models\FaturaEmpresa;
 use Yii;
 use frontend\models\Fatura;
 use frontend\models\FaturaSearch;
@@ -50,6 +51,7 @@ class FaturaController extends Controller
      * @param integer $id
      * @return mixed
      */
+
     public function actionView($id)
     {
         return $this->render('view', [
@@ -102,6 +104,23 @@ class FaturaController extends Controller
      */
     public function actionDelete($id)
     {
+        $delCustom_cliente = \frontend\models\FaturaCliente::findAll(['id_fatura'=>$id]);
+        $delLinha = \frontend\models\LinhaFatura::findAll(['id_fatura'=>$id]);
+        $delEmpresa = FaturaEmpresa::findAll(['id_fatura'=>$id]);
+
+
+        foreach ($delCustom_cliente as $del){
+            $del->delete();
+        }
+
+        foreach ($delLinha as $del){
+            $del->delete();
+        }
+
+        foreach ($delEmpresa as $del){
+            $del->delete();
+        }
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -123,14 +142,4 @@ class FaturaController extends Controller
         }
     }
 
-    public function actionFindInTable()
-    {
-        $value = Yii::$app->user->id;
-        $fatura = FaturaCliente::findAll(''.$value);
-        //$exist = FaturaCliente::find()->where([ 'numero_cartao_cliente' => $value])->exists();
-        /*return array(
-            'condition'=>'user_id='.Yii::$app->user->id,
-        );*/
-        //return $exist;
-    }
 }

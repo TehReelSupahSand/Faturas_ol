@@ -13,7 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 $rows = (new \yii\db\Query())
     ->from('linha_fatura')
     ->where(['id_fatura' => $model->id])
-    //->limit(10)
     ->all();
 
 ?>

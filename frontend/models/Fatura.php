@@ -52,7 +52,7 @@ class Fatura extends \yii\db\ActiveRecord
             'numero' => 'Numero',
             'data' => 'Data',
             'imagem_path' => 'Imagem Path',
-            'favorito' => 'Favorito',
+            'favorito' => 'Importante',
         ];
     }
 
