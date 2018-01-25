@@ -2,6 +2,7 @@
 
 namespace frontend\models;
 
+use Codeception\Module\Cli;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -178,12 +179,10 @@ class Cliente extends ActiveRecord implements IdentityInterface
         $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
 
+    /** @param string $new_password*/
 
     public function updatePassword($new_password) {
-        if ($this->new_password==""){
-            return false;
-        }
-        else if ($this->new_password!=''){
+        if ($new_password!==""){
             $this->password_hash = Yii::$app->security->generatePasswordHash($new_password);
         }
     }
@@ -211,7 +210,6 @@ class Cliente extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
-
 
     /**
      * @return \yii\db\ActiveQuery

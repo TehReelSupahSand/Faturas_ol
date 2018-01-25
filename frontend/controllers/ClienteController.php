@@ -15,6 +15,9 @@ use yii\filters\VerbFilter;
  */
 class ClienteController extends Controller
 {
+
+    public $new_password;
+
     /**
      * @inheritdoc
      */
@@ -85,16 +88,38 @@ class ClienteController extends Controller
     {
         $model = $this->findModel($id);
 
-        $model->updatePassword('new_password');
+        if ($model->load(Yii::$app->request->post())) {
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $password = Yii::$app->security->generatePasswordHash();
+
+            $model->password_hash = $password;
+
             return $this->redirect(['index']);
-        } else {
+        }
+        else {
             return $this->render('update', [
                 'model' => $model,
             ]);
         }
     }
+
+   /* public function actionChangepassword()
+    {
+        $user = Yii::$app->user->identity;
+        $loadedPost = $user->load(Yii::$app->request->post());
+
+        if ($loadedPost && $user->validate()){
+
+            $user->password = $user->newPassword;
+
+            $user->save(false);
+
+            Yii::$app->session->setFlash('success','mudou');
+            return $this->refresh();
+        }
+
+        return $this->render("changepassword",['user' => $user,]);
+    }*/
 
     /**
      * Deletes an existing Cliente model.
