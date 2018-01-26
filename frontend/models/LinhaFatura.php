@@ -52,7 +52,7 @@ class LinhaFatura extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'valor_unitario' => 'Valor Unitario',
-            'nome_produto' => 'Nome Produto',
+            'nome_produto' => 'Nome do Produto',
             'quantidade' => 'Quantidade',
             'descricao' => 'Descricao',
             'id_fatura' => 'Id Fatura',

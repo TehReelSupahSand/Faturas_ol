@@ -3,8 +3,10 @@
 namespace frontend\controllers;
 
 use frontend\models\FaturaCliente;
+use frontend\models\LinhaFatura;
 use frontend\models\FaturaEmpresa;
 use Yii;
+use yii\data\ActiveDataProvider;
 use frontend\models\Fatura;
 use frontend\models\FaturaSearch;
 use yii\web\Controller;
@@ -54,8 +56,15 @@ class FaturaController extends Controller
 
     public function actionView($id)
     {
+        $query = LinhaFatura::find()->where(['id_fatura'=>$id]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProvider' => $dataProvider,
         ]);
     }
 

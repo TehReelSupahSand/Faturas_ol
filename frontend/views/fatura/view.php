@@ -5,15 +5,11 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Fatura */
+/* @var $dataProvider frontend\models\LinhaFatura */
 
 $this->title = "Fatura | ".$model->numero;
 $this->params['breadcrumbs'][] = ['label' => 'Faturas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-
-$rows = (new \yii\db\Query())
-    ->from('linha_fatura')
-    ->where(['id_fatura' => $model->id])
-    ->all();
 
 ?>
 
@@ -41,13 +37,27 @@ $rows = (new \yii\db\Query())
         ],
     ]) ?>
 
-    <h4>Linhas da fatura</h4>
+    <?php if ($dataProvider!=""){ ?>
 
-    <?php
-    echo 'Valor unitario|€  |   Quantidade  |  Nome do Produto  |  Descricao  |  Valor Total';
-    echo "</br>";
-    foreach ($rows as $row){
-        echo $row['valor_unitario'].'€ ---   '.$row['quantidade'].' --- '.$row['nome_produto'].'---    '.$row['descricao'].'  ---  '.$row['valor_total'] ."€</br>";
-    } ?>
+        <b><h4>Linhas da fatura</h4></b>
+
+        <?=\yii\grid\GridView::widget([
+            'summary' => "",
+            'dataProvider' => $dataProvider,
+            'columns' => [
+                //'id',
+                'nome_produto',
+                'valor_unitario',
+                'quantidade',
+                'descricao',
+                'valor_total',
+            ],
+        ])?>
+
+    <?php } else { ?>
+
+        <h4 style="color: dodgerblue;">Sem linhas a apresentar</h4>
+
+    <?php } ?>
 
 </div>
