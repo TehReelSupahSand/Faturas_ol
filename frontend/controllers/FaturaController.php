@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\models\Empresa;
 use frontend\models\FaturaCliente;
 use frontend\models\LinhaFatura;
 use frontend\models\FaturaEmpresa;
@@ -56,15 +57,32 @@ class FaturaController extends Controller
 
     public function actionView($id)
     {
-        $query = LinhaFatura::find()->where(['id_fatura'=>$id]);
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+        /**
+        $queryEmpresa = "SELECT empresa.*
+        FROM empresa
+        LEFT JOIN fatura_empresa ON empresa.id = fatura_empresa.id_empresa
+        LEFT JOIN fatura ON fatura_empresa.id_fatura = fatura.id
+        WHERE fatura.id = 3"; */
+
+       $queryEmpresa = Empresa::find()->leftJoin('fatura_empresa','empresa.id = fatura_empresa.id_empresa')->where(['fatura_empresa.id_fatura'=>$id]);
+
+        $dataProviderEmpresa = new ActiveDataProvider([
+            'query' => $queryEmpresa,
+        ]);
+
+
+        /**query para mostrar as linhas da fatura*/
+        $queryLinha = LinhaFatura::find()->where(['id_fatura'=>$id]);
+
+        $dataProviderLinha = new ActiveDataProvider([
+            'query' => $queryLinha,
         ]);
 
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'dataProvider' => $dataProvider,
+            'dataProviderEmpresa' => $dataProviderEmpresa,
+            'dataProviderLinha' => $dataProviderLinha,
         ]);
     }
 
@@ -145,6 +163,15 @@ class FaturaController extends Controller
     protected function findModel($id)
     {
         if (($model = Fatura::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    protected function findModelEmpresa($id)
+    {
+        if (($model = Empresa::find()->join('INNER JOIN','fatura_empresa','fatura_empresa.id_empresa = empresa.id')->where(['fatura_empresa.id_fatura'=>$id])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

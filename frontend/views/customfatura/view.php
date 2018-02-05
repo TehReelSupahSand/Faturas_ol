@@ -5,8 +5,8 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Customfatura */
-/* @var $dataProvider app\models\LinhaFatura */
+/* @var $model frontend\models\Customfatura */
+/* @var $dataProvider frontend\models\LinhaFatura */
 
 $this->title = "Fatura Customizada | ".$model->numero;
 $this->params['breadcrumbs'][] = ['label' => 'Customfaturas', 'url' => ['index']];

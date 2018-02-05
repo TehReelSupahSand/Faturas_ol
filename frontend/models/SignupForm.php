@@ -68,6 +68,7 @@ class SignupForm extends Model
         }
 
             $user = new Cliente();
+            $user->id = 1;
             $user->nome = $this->nome;
             $user->username = $this->username;
             $user->email = $this->email;

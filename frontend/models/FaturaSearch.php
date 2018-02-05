@@ -41,6 +41,7 @@ class FaturaSearch extends Fatura
      */
     public function search($params)
     {
+        //mostra so as faturas pertencentes ao cliente autenticado
         $query = Fatura::find()->join('INNER JOIN','fatura_cliente','fatura_cliente.id_fatura = fatura.id')->where(['fatura_cliente.numero_cartao_cliente'=> Yii::$app->user->identity->numero_cartao]);
 
         // add conditions that should always apply here

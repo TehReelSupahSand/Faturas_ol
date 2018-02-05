@@ -5,10 +5,10 @@ namespace frontend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Empresa;
+use frontend\models\Empresa;
 
 /**
- * EmpresaSearch represents the model behind the search form about `app\models\Empresa`.
+ * EmpresaSearch represents the model behind the search form about `frontend\models\Empresa`.
  */
 class EmpresaSearch extends Empresa
 {
@@ -59,7 +59,7 @@ class EmpresaSearch extends Empresa
 
         // grid filtering conditions
         $query->andFilterWhere([
-            //'id' => $this->id,
+            'id' => $this->id,
             'nif' => $this->nif,
         ]);
 

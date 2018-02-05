@@ -4,23 +4,19 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\Customfatura */
+/* @var $model frontend\models\Empresa */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="customfatura-form">
+<div class="empresa-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'numero')->textInput() ?>
+    <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'data')->textInput() ?>
+    <?= $form->field($model, 'nif')->textInput() ?>
 
-    <?= $form->field($model, 'nif_empresa')->textInput() ?>
-
-    <?= $form->field($model, 'nome_empresa')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'morada_empresa')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'morada')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
