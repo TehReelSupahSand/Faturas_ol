@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'numero',
             'data',
             //'imagem_path',
-            'favorito',
+            //'favorito',
 
             ['class' => 'yii\grid\ActionColumn','template'=>'{view} {delete}'],
         ],

@@ -84,17 +84,18 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->redirect(['/fatura/index']);
+        if (Yii::$app->user->isGuest) {
+            $model = new LoginForm();
+            if ($model->load(Yii::$app->request->post()) && $model->login()) {
+                return $this->redirect(['/fatura/index']);
+            } else {
+                return $this->render('login', [
+                    'model' => $model,
+                ]);
+            }
         }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        else {
             return $this->redirect(['/fatura/index']);
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
         }
     }
 
