@@ -50,13 +50,13 @@ class Cliente extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'numero_cartao' => 'Numero Cartao',
+            'numero_cartao' => 'Numero do Cartao',
             'nome' => 'Nome',
-            'email' => 'Email',
+            'email' => 'E-mail',
             'username' => 'Username',
             'password_hash' => 'Password Hash',
             'telemovel' => 'Telemovel',
-            'nif' => 'Nif',
+            'nif' => 'NIF',
             'auth_key' => 'Auth Key',
         ];
     }

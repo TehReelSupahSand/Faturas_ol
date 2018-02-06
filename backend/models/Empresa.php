@@ -45,7 +45,7 @@ class Empresa extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nome' => 'Nome',
-            'nif' => 'Nif',
+            'nif' => 'NIF',
             'morada' => 'Morada',
         ];
     }
