@@ -91,6 +91,24 @@ class CustomfaturaController extends Controller
         }
     }
 
+    public function actionCreatelinha($id)
+    {
+        $model = new LinhaFatura();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $model->id_custom_fatura = $id;
+
+            $model->save();
+
+            return $this->redirect(['view', 'id' => $id]);
+        } else {
+            return $this->render('createlinha', [
+                'model' => $model,
+            ]);
+        }
+    }
+
     /**
      * Updates an existing Customfatura model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -106,6 +124,21 @@ class CustomfaturaController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionUpdatelinha($id)
+    {
+        $model = LinhaFatura::findOne($id);
+
+        $back = $model->id_custom_fatura;
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $back]);
+        } else {
+            return $this->render('updatelinha', [
                 'model' => $model,
             ]);
         }
@@ -137,6 +170,15 @@ class CustomfaturaController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionDeletelinha($id)
+    {
+        $back =  LinhaFatura::findOne($id)->id_custom_fatura;
+
+        LinhaFatura::findOne($id)->delete();
+
+        return $this->redirect(['view', 'id' => $back]);
     }
 
     /**

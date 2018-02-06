@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'new_password')->passwordInput(['placeholder'=>'Insira caso queira alterar (não implementado)']) ?>
+    <?php //$form->field($model, 'new_password')->passwordInput(['placeholder'=>'Insira caso queira alterar (não implementado)']) ?>
 
     <?= $form->field($model, 'telemovel')->textInput(['maxlength' => true,'placeholder'=>'Opcional']) ?>
 

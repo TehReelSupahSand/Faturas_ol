@@ -12,6 +12,7 @@ use yii\filters\VerbFilter;
 
 /**
  * ClienteController implements the CRUD actions for Cliente model.
+ * @property string $new_password
  */
 class ClienteController extends Controller
 {
@@ -21,6 +22,14 @@ class ClienteController extends Controller
     /**
      * @inheritdoc
      */
+
+    public function rules()
+    {
+        return [
+            [['new_password'], 'string', 'min' => 6],
+        ];
+    }
+
     public function behaviors()
     {
         return [
@@ -88,11 +97,7 @@ class ClienteController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post())) {
-
-            $password = Yii::$app->security->generatePasswordHash();
-
-            $model->password_hash = $password;
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             return $this->redirect(['index']);
         }

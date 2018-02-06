@@ -49,10 +49,14 @@ class Cliente extends ActiveRecord implements IdentityInterface
             [['nome', 'email', 'username', 'password_hash','nif'], 'required'],
             [['nome'], 'string', 'max' => 500],
             [['email'], 'string', 'max' => 100],
+            [['email'], 'unique'],
             [['username'], 'string', 'max' => 16],
+            [['username'], 'unique'],
             [['password_hash'], 'string', 'max' => 255],
             [['nif'],'string','min'=>9,'max'=>9],
+            [['nif'],'unique'],
             [['telemovel'], 'string', 'max'=> 9, 'min' => 9],
+            [['telemovel'], 'unique'],
 
             [['new_password'], 'string', 'min' => 6],
         ];

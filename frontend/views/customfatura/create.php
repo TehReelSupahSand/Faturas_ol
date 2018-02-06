@@ -4,9 +4,9 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Customfatura */
+/* @var $model frontend\models\Customfatura */
 
-$this->title = 'Create Customfatura';
+$this->title = 'Fatura Customizada';
 $this->params['breadcrumbs'][] = ['label' => 'Customfaturas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

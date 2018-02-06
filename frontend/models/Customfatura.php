@@ -49,7 +49,7 @@ class Customfatura extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'numero' => 'Número',
+            'numero' => 'Número da Fatura',
             'data' => 'Data',
             'nif_empresa' => 'NIF da Empresa',
             'nome_empresa' => 'Nome da Empresa',
