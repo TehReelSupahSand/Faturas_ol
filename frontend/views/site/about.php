@@ -7,7 +7,7 @@ use yii\helpers\Html;
 $this->title = 'Sobre nós';
 //$this->params['breadcrumbs'][] = $this->title;
 
-$results = \app\models\Empresa::find()->count();
+$results = \frontend\models\Empresa::find()->count();
 
 
 ?>
