@@ -9,7 +9,7 @@ use yii\widgets\DetailView;
 /* @var $dataProvider frontend\models\LinhaFatura */
 
 $this->title = "Fatura Customizada | ".$model->numero;
-$this->params['breadcrumbs'][] = ['label' => 'Customfaturas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Faturas Customizadas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

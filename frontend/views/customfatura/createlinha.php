@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model frontend\models\LinhaFatura */
 
 $this->title = 'Criar Linha';
-$this->params['breadcrumbs'][] = ['label' => 'Linha Faturas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Faturas Customizadas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="linha-fatura-create">

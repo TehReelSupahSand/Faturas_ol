@@ -20,7 +20,7 @@ $results = \frontend\models\Empresa::find()->count();
 
             <h4 style="margin-left: 20px">
                 O Faturas.OL é um serviço de armazenamento e gestão das suas faturas.
-                Tem como premissa a existencia de um cartão digital que quando é utilizado numa das empresas
+                Tem como premissa a existência de um cartão digital que quando é utilizado numa das empresas
                 aderentes ao programa enviará uma copia do texto da fatura, com todos os elementos apresentados em papel,
                 para a nossa plataforma e disponibilizá-la-á ao cliente associado sendo assim possível ter acesso à mesma
                 independentemente do local, desde que haja uma conexão à internet.
